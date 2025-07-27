@@ -4,7 +4,7 @@ from app import create_app
 # Crear aplicación
 app = create_app()
 
-if **name** == '__main__':
+if __name__ == '__main__':
     # Configuración para producción
     port = int(os.environ.get('PORT', 5000))
     debug = os.environ.get('FLASK_ENV') != 'production'
