@@ -1,0 +1,94 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="mb-4">
+            <h1><i class="fas fa-search"></i> Búsqueda de Posts</h1>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form method="GET" action="{{ url_for('main.search') }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" name="q"
+                                placeholder="Buscar en títulos y contenido..." value="{{ query or '' }}" autofocus />
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if query %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> {{ message }}
+        </div>
+        {% endif %} {% if posts %}
+        <div class="mb-3">
+            <small class="text-muted">
+                Se encontraron {{ posts|length }} resultado(s) para "{{ query }}"
+            </small>
+        </div>
+        {% for post in posts %}
+        <article class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="{{ url_for('main.view_post', post_id=post.id) }}" class="text-decoration-none">
+                        {{ post.title }}
+                    </a>
+                </h3>
+                <div class="text-muted mb-2">
+                    <small>
+                        <i class="fas fa-user"></i> {{ post.author }} •
+                        <i class="fas fa-calendar"></i> {{
+                        post.created_at.strftime('%d/%m/%Y') }}
+                    </small>
+                </div>
+                <p class="card-text">{{ post.summary }}</p>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('main.view_post', post_id=post.id) }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-book-open"></i> Leer completo
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %} {% elif query %}
+        <div class="text-center py-5">
+            <i class="fas fa-search-minus fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">No se encontraron resultados</h3>
+            <p class="text-muted">
+                No hay posts que coincidan con "{{ query }}".<br />
+                Intenta con otros términos de búsqueda.
+            </p>
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary mt-3">
+                <i class="fas fa-home"></i> Ver todos los posts
+            </a>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">Busca en el blog</h3>
+            <p class="text-muted">
+                Encuentra posts por título, contenido o autor.<br />
+                Escribe tu término de búsqueda arriba.
+            </p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-tags"></i> Búsquedas Populares</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('main.search', q='DevOps') }}" class="btn btn-outline-secondary btn-sm">
+                        DevOps
+                    </a>
+                    <a href="{{ url_for('main.search', q='Docker') }}" class="btn btn-outline-secondary btn-sm">
+                        Docker
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

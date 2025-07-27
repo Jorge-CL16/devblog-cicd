@@ -1,0 +1,166 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Encabezado -->
+        <div class="d-flex align-items-center mb-4">
+            <h1><i class="fas fa-plus-circle"></i> Crear Nuevo Post</h1>
+        </div>
+        <!-- Formulario principal -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('main.create_post') }}">
+                    <!-- Título del post -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label">
+                            <i class="fas fa-heading"></i> Título del Post *
+                        </label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            placeholder="Escribe un título atractivo..."
+                            value="{{ form_data.title if form_data else '' }}" maxlength="200" required />
+                        <div class="form-text">
+                            Máximo 200 caracteres. Sé descriptivo y atractivo.
+                        </div>
+                    </div>
+                    <!-- Autor del post -->
+                    <div class="mb-3">
+                        <label for="author" class="form-label">
+                            <i class="fas fa-user"></i> Autor
+                        </label>
+                        <input type="text" class="form-control" id="author" name="author"
+                            placeholder="Tu nombre (opcional)" value="{{ form_data.author if form_data else '' }}" />
+                        <div class="form-text">
+                            Si no especificas un autor, se usará "Anónimo".
+                        </div>
+                    </div>
+                    <!-- Contenido del post -->
+                    <div class="mb-4">
+                        <label for="content" class="form-label">
+                            <i class="fas fa-edit"></i> Contenido del Post *
+                        </label>
+                        <textarea class="form-control" id="content" name="content" rows="12" placeholder="Escribe tu post aquí...
+Puedes usar párrafos separados por líneas 
+en blanco.
+¡Comparte tus ideas, experiencias o 
+conocimientos!" required>
+{{ form_data.content if form_data else '' }}</textarea>
+                        <div class="form-text">
+                            Usa párrafos separados por líneas en blanco para mejor
+                            legibilidad.
+                        </div>
+                    </div>
+                    <!-- Botones de acción -->
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Publicar Post
+                        </button>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                        <button type="button" class="btn btn-outline-info" onclick="previewPost()">
+                            <i class="fas fa-eye"></i> Vista Previa
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar con consejos -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-lightbulb"></i> Consejos para escribir</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        <strong>Título claro:</strong> Describe de qué trata tu post
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        <strong>Párrafos cortos:</strong> Facilita la lectura
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        <strong>Ejemplos prácticos:</strong> Ayudan a entender mejor
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        <strong>Conclusión:</strong> Resume los puntos clave
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Información sobre formato -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6><i class="fas fa-info-circle"></i> Formato del texto</h6>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    • Separa párrafos con líneas en blanco<br />
+                    • Los saltos de línea simples se conservan<br />
+                    • No se requiere HTML, solo texto plano<br />
+                    • El formato se aplicará automáticamente
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript para vista previa -->
+<script>
+    function previewPost() {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+        const author = document.getElementById("author").value || "Anónimo";
+        if (!title || !content) {
+            alert(
+                "Por favor completa el título y contenido antes de la vista previa."
+            );
+            return;
+        }
+        // Crear ventana de vista previa
+        const previewWindow = window.open("", "_blank", "width=800,height=600");
+        const previewContent = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vista Previa - ${title}</title>
+<link 
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.cs
+s" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+<div class="card">
+<div class="card-body">
+<h1>${title}</h1>
+<div class="text-muted mb-3">
+<small>Por: ${author} • ${new
+                Date().toLocaleDateString()}</small>
+</div>
+<div class="content">
+${content
+                .split("\n\n")
+                .map((p) =>
+                    p.trim()
+                        ? `<p>${p.replace(/\n/g, "<br>")}</p>`
+                        : ""
+                )
+                .join("")}
+</div>
+</div>
+</div>
+<div class="mt-3">
+<button class="btn btn-secondary" 
+onclick="window.close()">Cerrar Vista Previa</button>
+</div>
+</div>
+</body>
+</html>
+`;
+        previewWindow.document.write(previewContent);
+        previewWindow.document.close();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,251 @@
+/* ================================
+ESTILOS GENERALES
+================================ */
+/* Mejorar la tipografía general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Espaciado consistente para el contenido principal */
+main.container {
+    min-height: calc(100vh - 200px);
+    /* Asegura que el footer esté abajo */
+}
+
+/* ================================
+NAVEGACIÓN
+================================ */
+/* Mejorar la apariencia de la navbar */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-brand i {
+    margin-right: 8px;
+    color: #ffc107;
+    /* Color dorado para el icono */
+}
+
+/* Efectos hover en los enlaces de navegación */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+/* ================================
+CARDS Y CONTENIDO
+================================ */
+/* Mejorar la apariencia de las cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Estilo para títulos de posts */
+.card-title a {
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+    color: #3498db;
+    text-decoration: none !important;
+}
+
+/* ================================
+CONTENIDO DE POSTS
+================================ */
+/* Mejorar la legibilidad del contenido de posts */
+.post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+/* Estilo para código inline */
+code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #e83e8c;
+}
+
+/* ================================
+FORMULARIOS
+================================ */
+/* Mejorar la apariencia de los formularios */
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Estilo especial para el textarea de contenido */
+#content {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+/* ================================
+BOTONES
+================================ */
+/* Efectos hover mejorados para botones */
+.btn {
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Botón primario personalizado */
+.btn-primary {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #2980b9, #21618c);
+}
+
+/* ================================
+ALERTAS Y MENSAJES
+================================ */
+/* Mejorar la apariencia de las alertas */
+.alert {
+    border: none;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: #27ae60;
+    background-color: #d5f4e6;
+    color: #1e7e34;
+}
+
+.alert-danger {
+    border-left-color: #e74c3c;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-info {
+    border-left-color: #3498db;
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* ================================
+FOOTER
+================================ */
+/* Estilo del footer */
+footer {
+    margin-top: auto;
+}
+
+footer h5 i {
+    color: #ffc107;
+    margin-right: 8px;
+}
+
+/* ================================
+RESPONSIVE DESIGN
+================================ */
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ================================
+UTILIDADES PERSONALIZADAS
+================================ */
+/* Espaciado personalizado */
+.gap-2 {
+    gap: 0.5rem !important;
+}
+
+/* Texto con sombra sutil */
+.text-shadow {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación de carga */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Estilo para badges */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}
+
+/* ================================
+EFECTOS ESPECIALES
+================================ */
+/* Animación suave para elementos que aparecen */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de resaltado para búsquedas */
+.highlight {
+    background-color: #fff3cd;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Estilo para elementos de carga */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}

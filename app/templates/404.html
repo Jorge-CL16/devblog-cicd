@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="py-5">
+            <i class="fas fa-exclamation-triangle fa-5x text-warning mb-4"></i>
+            <h1 class="display-4">404</h1>
+            <h2>Página no encontrada</h2>
+            <p class="lead text-muted">
+                Lo sentimos, la página que buscas no existe.
+            </p>
+            <div class="mt-4">
+                <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+                    <i class="fas fa-home"> </i> Volver al inicio
+                </a>
+                <a href="{{ url_for('main.search') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-search"></i> Buscar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

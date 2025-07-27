@@ -1,0 +1,105 @@
+# ================================
+# ARCHIVOS DE DESARROLLO
+# ================================
+# Cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+# Distribuciones / empaquetado
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+# ================================
+# ENTORNOS VIRTUALES
+# ================================
+# Entornos virtuales de Python
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+# ================================
+# ARCHIVOS DE CONTROL DE VERSIONES
+# ================================
+# Git
+.git/
+.gitignore
+.gitattributes
+# ================================
+# ARCHIVOS DE EDITORES/IDEs
+# ================================
+# Visual Studio Code
+.vscode/
+# PyCharm
+.idea/
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+# ================================
+# ARCHIVOS DEL SISTEMA OPERATIVO
+# ================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux
+*~
+# ================================
+# ARCHIVOS DE TESTING Y CI/CD
+# ================================
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+# ================================
+# ARCHIVOS DE DOCUMENTACIÓN
+# ================================
+# Documentación
+docs/_build/
+README.md
+*.md
+# ================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ================================
+# Logs de desarrollo
+*.log
+# Archivos temporales
+*.tmp
+*.temp
+# Archivos de configuración local
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore

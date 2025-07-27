@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Encabezado de la página -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-newspaper"></i> Posts Recientes</h1>
+            <a href="{{ url_for('main.create_post') }}" class="btn btn￾primary">
+                <i class="fas fa-plus"></i> Nuevo Post
+            </a>
+        </div>
+        <!-- Lista de posts -->
+        {% if posts %}
+        {% for post in posts %}
+        <article class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <!-- Título del post -->
+                <h2 class="card-title">
+                    <a href="{{ url_for('main.view_post', 
+post_id=post.id) }}" class="text-decoration-none">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <!-- Metadatos del post -->
+                <div class="text-muted mb-3">
+                    <small>
+                        <i class="fas fa-user"></i> {{ post.author
+                        }} •
+                        <i class="fas fa-calendar"></i> {{
+                        post.created_at.strftime('%d/%m/%Y %H:%M') }}
+                        {% if post.updated_at != post.created_at %}
+                        • <i class="fas fa-edit"></i> Editado:
+                        {{ post.updated_at.strftime('%d/%m/%Y %H:%M') }}
+                        {% endif %}
+                    </small>
+                </div>
+                <!-- Resumen del contenido -->
+                <p class="card-text">{{ post.summary }}</p>
+                <!-- Botón para leer más -->
+                <a href="{{ url_for('main.view_post', 
+post_id=post.id) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-book-open"></i> Leer más
+                </a>
+            </div>
+        </article>
+        {% endfor %}
+        {% else %}
+        <!-- Mensaje cuando no hay posts -->
+        <div class="text-center py-5">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">No hay posts aún</h3>
+            <p class="text-muted">¡Sé el primero en escribir algo!</p>
+            <a href="{{ url_for('main.create_post') }}" class="btn btnprimary">
+                <i class="fas fa-plus"></i> Crear primer post
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <!-- Sidebar con información adicional -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Acerca del Blog</h5>
+            </div>
+            <div class="card-body">
+                <p>Bienvenido a DevBlog, mi espacio personal para documentar
+                    mi aprendizaje en DevOps y desarrollo.</p>
+                <h6><i class="fas fa-chart-bar"></i> Estadísticas</h6>
+                <ul class="list-unstyled">
+                    <li><strong>{{ posts|length }}</strong> posts
+                        publicados</li>
+                    <li><strong>API REST</strong> disponible</li>
+                    <li><strong>CI/CD</strong> configurado</li>
+                </ul>
+                <h6><i class="fas fa-code"></i> API Endpoints</h6>
+                <small class="text-muted">
+                    <code>GET /api/posts</code> - Obtener todos los
+                    posts<br>
+                    <code>POST /api/posts</code> - Crear nuevo post<br>
+                    <code>GET /api/search?q=término</code> - Buscar posts
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
