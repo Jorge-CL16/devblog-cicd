@@ -23,12 +23,20 @@ LABEL version="1.0"
 # PYTHONDONTWRITEBYTECODE=1: Evita crear archivos .pyc (optimización)
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+#AGREGAR PARA PRODUCCION 
+ENV FLASK_ENV=production
+ENV PORT=5000
+
 # Establecer el directorio de trabajo dentro del contenedor
 # Todo el código de la aplicación estará en /app
 WORKDIR /app
 # ================================
 # ETAPA 4: INSTALACIÓN DE DEPENDENCIAS
 # ================================
+#INSTALAR PARA PRODUCCION 
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 # Copiar requirements.txt PRIMERO (optimización de Docker layers)
 # ¿Por qué copiar requirements.txt antes que el resto del código?
 # - Docker usa capas (layers) para optimizar builds
@@ -50,6 +58,10 @@ COPY . .
 # ================================
 # ETAPA 6: CONFIGURACIÓN DE USUARIO
 # ================================
+#PARA PRODUCCION
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+CMD curl -f http://localhost:$PORT/api/health || exit 1
 # Crear un usuario no-root para seguridad
 # ¿Por qué no usar root?
 # - Principio de menor privilegio
@@ -64,7 +76,7 @@ USER appuser
 # Exponer el puerto 5000 (puerto por defecto de Flask)
 # Esto es documentativo - le dice a otros desarrolladores qué puerto usar
 # No abre automáticamente el puerto (eso se hace al ejecutar el contenedor)
-EXPOSE 5000
+EXPOSE $PORT
 # ================================
 # ETAPA 8: COMANDO DE INICIO
 # ================================
